@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeWith_N.A Full  Stack Web Development</title>
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #f4f4f4;
+            overflow-x: hidden;
+            padding: 0;
+        }
+
+        /* Header and Navbar */
+        header {
+            background-color: #1c1c1c;
+        
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 5%;
+         
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 20px;
+        }
+
+        .nav-links li {
+            margin-left:25px;
+            margin: 20px;
+        }
+
+        .nav-links a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #1e90ff;
+            transform: translateY(-5px);
+        }
+
+        /* Hamburger menu for small screens */
+        #hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        #hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+           margin-right: 10px;
+           margin-top: 5%;
+          background-color: gold;
+        }
+
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 80px;
+            right: 100%;
+            background-color: #1c1c1c;
+          
+            padding: 20px;
+        }
+
+        .nav-links.active li {
+            margin-bottom: 1px;
+            margin-top: 20px;
+            width: 20%;
+           
+        }
+
+        /* Content Section */
+        .content-section {
+            background-color: #181818;
+            padding: 120px 20px 80px; /* Adjusted padding to avoid overlap with header */
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+            border-bottom: 2px solid #333;
+        }
+
+        .content-section h2 {
+            font-size: 40px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .content-section p {
+            font-size: 18px;
+            color: #dcdcdc;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .content-section .button {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #1e90ff;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .content-section .button:hover {
+            background-color: #0080ff;
+            transform: scale(1.1);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Languages Toggle */
+        #toggle-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-size: 35px;
+            cursor: pointer;
+            position: fixed;
+            left: 9px;
+            top: 60px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #toggle-btn:hover {
+            transform: scale(1.2);
+        }
+
+        #languages-list {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #333;
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            list-style: none;
+            margin: 0;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        #languages-list li {
+            margin: 20px 0;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #languages-list li:hover {
+            background-color: #1e90ff;
+            transform: translateX(10px);
+        }
+
+        #languages-list.active {
+            display: block;
+        }
+
+        #languages-list .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #languages-list .close-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* New Flowchart Section */
+        .map-section {
+            margin-top: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .map-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .flowchart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .flowchart .step {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 30px;
+            margin: 15px;
+            border-radius: 50px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .flowchart .step:hover {
+            transform: scale(1.1);
+            background-color: #1e90ff;
+        }
+
+        .flowchart .arrow {
+            font-size: 36px;
+            color: #1e90ff;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            /* Navbar and Hamburger for mobile */
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #1c1c1c;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                padding: 10px;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            #hamburger {
+                display: flex;
+            }
+
+            .navbar {
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Content Section on small screens */
+            .content-section h2 {
+                font-size: 30px;
+            }
+
+            .content-section p {
+                font-size: 16px;
+            }
+
+            .content-section .button {
+                padding: 12px 25px;
+                font-size: 18px;
+            }
+
+            /* Flowchart on small screens */
+            .flowchart {
+                flex-direction: column;
+            }
+
+            .flowchart .step {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+
+            .flowchart .arrow {
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-section h2 {
+                font-size: 24px;
+            }
+
+            .content-section p {
+                font-size: 14px;
+            }
+
+            .content-section .button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="https://youtube.com/@codewith.n.a.74?si=I_4_BBk6uMl1bER3">CodeWith_N.A</a>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Services</a></li>
+            <li><a href="contect.html">Contact</a></li>
+        </ul>
+        <div id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+</header>
+<script>
+   
+    function html() {
+        window.location.href = "h.html";
+    }
+    function css() {
+        window.location.href = "css.html";
+    }
+    function jk() {
+        window.location.href = "sk.html";
+    }
+    function react() {
+        window.location.href = "react.html";
+    }
+    function php() {
+        window.location.href = "php.html";
+    }
+    function mysql() {
+        window.location.href = "mysqli.html";
+    }
+    function mongodb() {
+        window.location.href = "mongodb.html";
+    }
+    function python() {
+        window.location.href = "python.html";
+    }
+
+   
+</script>
+<button id="toggle-btn">☰</button>
+<ul id="languages-list">
+    <li onclick="html()">HTML</li>
+    <li onclick="css()">CSS</li>
+    <li onclick="jk()">JavaScript</li>
+    <li onclick="react()">Frontend Framework (React)</li>
+    <li onclick="php()">Backend (PHP)</li>
+    <li onclick="mysql()">Dtabas MySQL</li>
+    <li onclick="mongodb()">Dtabas MongoDB</li>
+    <li onclick="python()">python</li>
+   
+  
+    <li class="close-btn">X</li>
+</ul>
+
+<section class="content-section">
+    <h2>Full Stack Web Development</h2>
+    <p>Explore the ins and outs of full stack web development, mastering both frontend and backend technologies to build dynamic, responsive, and functional web applications.</p>
+    <a href="getstart.html" class="button">Start Now</a>
+</section>
+
+<section class="map-section">
+    <div class="container">
+        <h2>Your Path to Mastery</h2>
+        <div class="flowchart">
+            <div class="step"><li onclick="html()">HTML</li></div>
+            <div class="step"><li onclick="css()">CSS</li></div>
+            <div class="step"><li onclick="jk()">JavaScript</li></div>
+            <div class="step"><li onclick="react()">Frontend Framework (React)</li></div>
+            <div class="step"><li onclick="php()">Backend (PHP)</li></div>
+            <div class="step"><li onclick="mysql()">Dtabas MySQL</li></div>
+            <div class="step"><li onclick="mongodb()">Dtabas MongoDB</li></div>
+            <div class="step">Git & Version Control</div>
+            <div class="step">APIs (RESTful / GraphQL)</div>
+            <div class="step">Authentication & Security</div>
+            <div class="step">Testing & Debugging</div>
+            <div class="step">Deployment (CI/CD, Docker)</div>
+            <div class="step">Cloud & Server Management (AWS, Heroku)</div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Toggle Navbar on small screens
+    document.getElementById('hamburger').onclick = function () {
+        var navLinks = document.getElementById('nav-links');
+        navLinks.classList.toggle('active');
+    };
+
+    // Toggle Languages List
+    document.getElementById('toggle-btn').onclick = function () {
+        var languagesList = document.getElementById('languages-list');
+        languagesList.classList.toggle('active');
+    };
+
+    // Close Languages List on click
+    document.querySelector('.close-btn').onclick = function () {
+        var languagesList = document.getElementById('languages-list');
+        languagesList.classList.remove('active');
+    };
+</script>
+
+</body>
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    overflow-x: hidden;
+}
+
+
+
+.container {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flowchart {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.step {
+    background-color: #1e90ff;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s ease-in-out, background-color 0.4s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.step:hover {
+    transform: scale(1.1);
+    background-color: #ff6f61;
+}
+
+/* Arrow line between steps */
+.step::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -80px;
+    width: 80px;
+    height: 5px;
+    background-color: #fff;
+    z-index: 0;
+}
+
+.step:last-child::after {
+    display: none;
+}
+
+/* Line animation */
+.step::after {
+    animation: slideIn 1s forwards;
+    opacity: 0;
+}
+
+.flowchart .step:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+.flowchart .step::after {
+    right: -40px;
+    background: linear-gradient(90deg, #ff6f61, #1e90ff);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .flowchart {
+        flex-direction: column;
+    }
+
+    .step::after {
+        top: auto;
+        left: 50%;
+        right: auto;
+        bottom: -60px;
+        width: 5px;
+        height: 60px;
+        transform-origin: top;
+    }
+
+    .flowchart .step:last-child::after {
+        display: none;
+    }
+}
+</style>
+
+
+<footer>
+    <div style="background-color:black; color:white; padding:30px 0; text-align:center;">
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+            <!-- About Section -->
+            <div style="flex: 1; min-width: 200px; padding: 10px;">
+                <h3>About Us</h3>
+                <p>We provide high-quality programming tutorials, exercises, and quizzes to help learners master programming concepts and build real-world applications.</p>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div style="flex: 1; min-width: 200px; padding: 10px;">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li><a href="h.html" style="color:white; text-decoration:none;">HTML</a></li>
+                    <li><a href="css.html" style="color:white; text-decoration:none;">CSS</a></li>
+                    <li><a href="sk.html" style="color:white; text-decoration:none;">JavaScript</a></li>
+                    <li><a href="react.html" style="color:white; text-decoration:none;">React</a></li>
+                    <li><a href="php.html" style="color:white; text-decoration:none;">PHP</a></li>
+                    <li><a href="mysqli.html" style="color:white; text-decoration:none;">mysql</a></li>
+                    <li><a href="mongodb.html" style="color:white; text-decoration:none;">mongodb</a></li>
+                    <li><a href="python.html" style="color:white; text-decoration:none;">Python</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div style="flex: 1; min-width: 200px; padding: 10px;">
+                <h3>Contact Us</h3>
+                <p>Phone: <a href="tel:+9303546247" class="clickable">9303546247</a></p>
+                <p>Email: <a href="mailto:niteshamule74@gmail.com" class="clickable">niteshamule74@gmail.com</a></p>
+            </div>
+
+            <!-- Social Media Links Section -->
+            <div style="flex: 1; min-width: 200px; padding: 10px;">
+                <h3>Follow Us</h3>
+                <a href="https://youtube.com/@codewith.n.a.74?si=I_4_BBk6uMl1bER3" style="color:white; text-decoration:none; margin-right:10px;">YouTube</a>
+                <a href="https://www.instagram.com/code_with_n.a/profilecard/?igsh=MTQzMzQ1N3RyejFweg==" style="color:white; text-decoration:none; margin-right:10px;">Instagram</a>
+                <a href="https://t.me/CodwithNA" style="color:white; text-decoration:none; margin-right:10px;">Telegram</a>
+                <a href="https://github.com/Code-with-N-A" style="color:white; text-decoration:none;">Github</a>
+            </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div style="margin-top: 20px; border-top: 1px solid #555; padding-top: 10px;">
+            <p>&copy; 2024 Code with N.A. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+ 
+ 
+    
+</body>
+</html>
